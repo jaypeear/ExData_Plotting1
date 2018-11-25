@@ -5,6 +5,11 @@ f_readData <- function() {
   dateFormat <- "%d/%m/%Y"
   colClasses <- c(NA, NA, 'numeric', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric')
   naStrings <- c("?")
+  
+  if (!file.exists(dataFileName)) {
+    print(sprintf("ERROR: cannot open dataset file: <%s>", dataFileName))
+    stop()
+  }
   data <- read.csv(dataFileName, sep=";", header = T, colClasses=colClasses, 
                    na.strings=naStrings, stringsAsFactors = F)
   # Convert Dates to Date class and select the 2 requested dates
